@@ -8,7 +8,7 @@ mongoose.connect('mongodb://mongo/myappdatabase');
 
 app.get('/', function(req, res, next) {
     var evv = process.env.NODE_ENV || 'NONE'
-    res.send('Hello! ' + evv);
+    res.send('Hola! ' + evv);
 });
 
 http.createServer(app).listen(3000, function() {
