@@ -1,0 +1,26 @@
+mongo:
+  image: mongo
+  command: mongod --smallfiles
+dex1:
+  build: .
+  environment:
+    - NODE_ENV=INT
+  links:
+    - mongo
+  ports:
+    - "3000"
+dex2:
+  build: .
+  environment:
+    - NODE_ENV=LIVE
+  links:
+    - mongo
+  ports:
+    - "3000"
+nginx:
+  build: ./nginx
+  links:
+    - dex1:dex1
+    - dex2:dex2
+  ports:
+    - "80:80"
